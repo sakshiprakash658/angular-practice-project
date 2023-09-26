@@ -1,0 +1,79 @@
+JAVASCRIPT
+1. single threaded synchronous language, here code runs in execution context, 
+2. executes in 3 phases - creation (allocates memory to all variables subsquently as undefined then it stores whole fn in memory), 
+   second phase of execution: will now look for values assigned to variables and allocates memory to it (code execution phase)
+   As soon as whole js program is run, global execution code is created, it has 2 component, memory and code. it allocates variables to undefined, then in second phase, it assign value, and replace undefined with value 
+   
+3. 2 Golden Rules:
+    Variable declarations are scanned and are made undefined
+    Function declarations are scanned and are made available
+    and arrow function and foo = function(){...} type of function also behave like a variable in memory creaton phase.
+
+4. Undefined: a variable is 'declared', it has its own placeholder, it takes memory but not having the value of itself 'defined' hence 'undefined' and until the variable has assigned a value, the 'undefined' fills that particular placeholder
+   and 'undefined' is itself a datatype
+
+   Not Defined: This case comes in error where js engine neither find that particular variable nor its placeholder
+   and cannot find the variable in 1st phase of context (Memory allocation context)
+
+   and yes "flexibly typed language" sound pretty good instead of "weakly typed language"
+
+5.  Scope: where you can access the value of our function in our code
+
+   Lexical environment : the Local memory(Created and goes hand-in-hand with 1st phase of corresponding execution context ) along with Lexical environment with the parent! and every time the lexical environment of the corresponding context is used, it references to its parent Lexical environment
+
+   for simply understanding, I will try it as 'an onion example'
+   see when one layer of onion(a variable) covers the layer inside it, it also covers the inner layers inside that layer and a point on our first layer of onion encloses inner layers our inner layer(variable and function inside the layer) gets covered by our first layer(can access the variable on the context) and the second layer(under first layer) encloses the third layer(innermost layer)still covered by 1st layer(can access the variable on layer)
+
+    the Clojure concept starts here
+
+6. When global execution starts, var is assigned memory inside global object, but in case of let and const memory is allocated inside some scribt object because of which before initilisation of 
+    let and const, these two keywords cantbe accessed unlike var.
+
+7. let and const are hoisted but its memory is allocated at other place than window which cannot be accessed before initialisation.
+
+8.   -> let and const are hoisted. we cant use them before initialization is result of "temporal dead zone".
+    -> js use diff memory than global execution context to store let and cost. which is reason behind "temporal dead zone"
+    -> level of strictness ... var<<let<<const.
+    -> var //no temporal dead zone, can redeclare and re-initialize, stored in GES
+        let //use TDZ, can't re-declare, can re-initialize, stored in separate memory
+        const //use TDZ, can't re-declare, can't re-initialize, stored in separate memory
+    -> syntax error is similar to compile error. while type and reference error falls under run time error.
+    -> syntax error ... violation of JS syntax
+        type error ...  while trying to re-initialize const variable
+        reference error ... while trying to access variable which is not there in global memory.
+
+9.  let and const are hoisted but its memory is allocated at other place than window which cannot be accessed before initialisation.
+    Temporal Dead Zone exists until variable is declared and assigned a value.
+    window.variable OR this.variable will not give value of variable defined using let or const.
+
+10.  Code inside curly bracket is called block.
+        Multiple statements are grouped inside a block so it can be written where JS expects single statements like in if, else, loop, function etc.
+         Block values are stored inside separate memory than global. They are stored in block. (the reason let and const are called block scope)
+         Shadowing of variables using var, let and const.
+         The shadow should not cross the scope of original otherwise it will give error.
+         shadowing let with var is illegal shadowing and gives error.
+         var value stored in global memory and hence can be accessed outside block as well whereas same is not the case with let and const.
+
+11.  Closure :Function bundled with its lexical environment is known as a closure. 
+    Whenever function is returned, even if its vanished in execution context but still it remembers the reference it was pointing to. 
+    Its not just that function alone it returns but the entire closure and that's where it becomes interesting.
+
+12.  SetTimeout stores the function in a different place and attached a timer to it, when the timer is finished it rejoins the call stack and executed.
+
+13.  Without closure the var reference gives the latest value as it does not retain the original value but rather has the reference so any update in value after timeout will be shown.
+
+14. If we use let/const because they have block scope, every time a new copy of variable is attached, thus this can be done without closure.
+
+15. JS waits for none. It will execute leaving behind all blockers.
+
+16. All letters of a string hold index value.
+
+17. typeof of null is object = which is actually a bug of js.
+
+18. BigInt - datatype of js. Used to store very large numbers. 2 ways of representing BigInt are:
+let number1 = BigInt(12);
+let number2 = 12n;
+
+
+
+
